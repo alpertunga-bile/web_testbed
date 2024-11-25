@@ -167,6 +167,10 @@ class Trie {
     return node.key_node ? prefix : "";
   }
 
+  longest_prefix(value: string): string {
+    return this.inner_longest_prefix(this.root, value, "");
+  }
+
   private readonly root: TrieNode = new TrieNode(false);
 }
 
