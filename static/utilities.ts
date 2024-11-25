@@ -14,6 +14,13 @@ export async function get_tags_by_char(
 
   const tag_url_promises = [];
 
+  const process_tag = function (tag: string): string {
+    let processed: string = tag.replaceAll(",", "");
+    processed = processed.replaceAll(/\s+/g, " ");
+
+    return processed;
+  };
+
   for (let i = 1; i < totalpages; ++i) {
     url.searchParams.set("page", `${i}`);
 
@@ -30,7 +37,7 @@ export async function get_tags_by_char(
         return;
       }
 
-      tags.add(item.name);
+      tags.add(process_tag(item.name));
     });
   });
 
