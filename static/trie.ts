@@ -11,6 +11,12 @@ class TrieNode {
     return this.nodes.get(char);
   }
 
+  forEach(callback: (value: TrieNode, key: string) => void): void {
+    this.nodes.forEach((value_node, key_char) =>
+      callback(value_node, key_char)
+    );
+  }
+
   key_node: boolean = false;
   readonly nodes: Map<string, TrieNode> = new Map<string, TrieNode>();
 }
@@ -106,7 +112,7 @@ class Trie {
       keys.push(prefix);
     }
 
-    node.nodes.forEach((value_node, key_char) => {
+    node.forEach((value_node, key_char) => {
       keys.push(
         ...this.inner_starts_with(
           value_node,
@@ -128,7 +134,40 @@ class Trie {
     return this.inner_starts_with(last_node, prefix);
   }
 
-  readonly root: TrieNode = new TrieNode(false);
+  private inner_longest_prefix(
+    node: TrieNode | undefined,
+    value: string,
+    prefix: string,
+  ): string {
+    if (!node) {
+      return "";
+    }
+
+    if (value === "") {
+      return node.key_node ? prefix : "";
+    }
+
+    const head_char = value.charAt(0);
+    const last_chars = value.slice(1);
+
+    if (!node.contains(head_char)) {
+      return node.key_node ? prefix : "";
+    }
+
+    const result = this.inner_longest_prefix(
+      node.get(head_char),
+      last_chars,
+      prefix + head_char,
+    );
+
+    if (result) {
+      return result;
+    }
+
+    return node.key_node ? prefix : "";
+  }
+
+  private readonly root: TrieNode = new TrieNode(false);
 }
 
 export default Trie;
