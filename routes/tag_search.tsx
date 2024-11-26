@@ -32,6 +32,10 @@ interface ITagInfo {
   tags: Array<Array<string>>;
 }
 
+/*
+ * ------------------------------------------------------------------------------
+ * -- Functions
+ */
 async function create_cache_file(tag_sets: Set<string>[]) {
   const tag_info: ITagInfo = {
     creation_time: format(new Date(), date_formating),
