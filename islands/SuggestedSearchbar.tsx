@@ -42,6 +42,20 @@ export default function SuggestedSearchbar(
     searchbar_ref.current.value = event.target.innerText;
   };
 
+  const suggestion_keydown = (event) => {
+    if (!searchbar_ref.current) {
+      return;
+    }
+
+    if (event.key !== "Enter") {
+      return;
+    }
+
+    suggestions.value = [];
+
+    searchbar_ref.current.value = event.target.innerText;
+  };
+
   return (
     <PicoStyle>
       <input
@@ -53,14 +67,16 @@ export default function SuggestedSearchbar(
         ref={searchbar_ref}
       />
       <ul
-        className={"overflow-auto h-52 w-auto z-10"}
+        className={"overflow-y-auto h-52 w-auto z-10"}
         key="tag_searchbar_suggestion"
       >
         {suggestions.value.map((suggestion) => (
           <li
-            className={"hover:bg-fuchsia-700 rounded-md px-4 py-2"}
+            className={"hover:bg-fuchsia-700 focus:bg-fuchsia-700 rounded-md px-4 py-2"}
             key={`tag_${suggestion}`}
             onClick={suggestion_onclick}
+            onKeyDown={suggestion_keydown}
+            tabIndex={0}
           >
             {suggestion}
           </li>

@@ -11,7 +11,6 @@ import { difference, format, parse } from "@std/datetime";
  */
 import CenterDiv from "../components/CenterDiv.tsx";
 import MainDiv from "../components/MainDiv.tsx";
-import Trie from "../static/trie.ts";
 import SuggestedSearchbar from "../islands/SuggestedSearchbar.tsx";
 
 const tag_head_chars = "abcdefghijklmnopqrstuvwxyz123456789".split("");
