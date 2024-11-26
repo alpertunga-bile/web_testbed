@@ -1,20 +1,29 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
 import { exists } from "$std/fs/exists.ts";
-import CenterDiv from "../components/CenterDiv.tsx";
-import MainDiv from "../components/MainDiv.tsx";
-import PicoStyle from "../components/PicoStyle.tsx";
-import Trie from "../static/trie.ts";
 import { get_tags_by_char } from "../static/utilities.ts";
 import { decode, encode } from "cbor-x";
 
 import { difference, format, parse } from "@std/datetime";
 
+/*
+ * ------------------------------------------------------------------------------
+ * -- Components
+ */
+import CenterDiv from "../components/CenterDiv.tsx";
+import MainDiv from "../components/MainDiv.tsx";
+import Trie from "../static/trie.ts";
+import SuggestedSearchbar from "../islands/SuggestedSearchbar.tsx";
+
 const tag_head_chars = "abcdefghijklmnopqrstuvwxyz123456789".split("");
 const tags_binary_filepath = "./static/tags.bin";
 const date_formating = "dd-MM-yyyy";
 
+/*
+ * ------------------------------------------------------------------------------
+ * -- Interfaces
+ */
 interface ITagSearchData {
-  tag_trie: Trie;
+  tag_values: Array<Array<string>>;
 }
 
 interface ITagInfo {
@@ -56,8 +65,6 @@ function check_if_cache_expired(
 
 export const handler: Handlers<ITagSearchData> = {
   async GET(_req, ctx) {
-    const tag_trie: Trie = new Trie();
-
     const is_bin_exists = await exists(tags_binary_filepath);
 
     if (is_bin_exists) {
@@ -67,9 +74,7 @@ export const handler: Handlers<ITagSearchData> = {
       if (
         !check_if_cache_expired(tag_info.creation_time, tag_info.remaining_day)
       ) {
-        tag_info.tags.forEach((tags) => tag_trie.multi_insert(tags));
-
-        return ctx.render({ tag_trie: tag_trie });
+        return ctx.render({ tag_values: tag_info.tags });
       }
 
       await Deno.remove(tags_binary_filepath);
@@ -83,29 +88,21 @@ export const handler: Handlers<ITagSearchData> = {
 
     const tag_sets = await Promise.all(tag_promises);
 
-    tag_sets.forEach((set_value) => tag_trie.multi_insert(set_value));
+    const tag_values = tag_sets.map((value) => Array.from(value));
 
     await create_cache_file(tag_sets);
 
-    return ctx.render({ tag_trie: tag_trie });
+    return ctx.render({ tag_values: tag_values });
   },
 };
 
 export default function TagSearchPage(props: PageProps) {
-  const { tag_trie } = props.data;
-  const temp_list: string[] = tag_trie.starts_with("as");
+  const { tag_values } = props.data;
 
   return (
     <MainDiv>
       <CenterDiv>
-        <PicoStyle>
-          <input
-            className={"search"}
-            type={"search"}
-            placeholder={"Search a tag"}
-            aria-label={"Search"}
-          />
-        </PicoStyle>
+        <SuggestedSearchbar tags={tag_values} />
       </CenterDiv>
     </MainDiv>
   );
