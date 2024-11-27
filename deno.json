@@ -7,6 +7,7 @@
     "start": "deno run -A --watch=static/,routes/ dev.ts",
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
+    "autoprefix": "deno run -A static/autoprefix_css.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
   },
   "lint": {
@@ -23,7 +24,10 @@
   "imports": {
     "$fresh/": "https://deno.land/x/fresh@1.7.3/",
     "@std/datetime": "jsr:@std/datetime@^0.225.2",
+    "@std/fs": "jsr:@std/fs@^1.0.6",
+    "autoprefixer": "npm:autoprefixer@^10.4.20",
     "cbor-x": "npm:cbor-x@^1.6.0",
+    "postcss": "npm:postcss@^8.4.49",
     "preact": "https://esm.sh/preact@10.22.0",
     "preact/": "https://esm.sh/preact@10.22.0/",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
