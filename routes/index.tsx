@@ -1,20 +1,50 @@
-export default function Home() {
+import { walk } from "$std/fs/walk.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import CenterDiv from "../components/CenterDiv.tsx";
+import MainDiv from "../components/MainDiv.tsx";
+
+interface IHandlerData {
+  route_names: string[];
+}
+
+export const handler: Handlers<IHandlerData> = {
+  async GET(_req, ctx) {
+    const route_names: string[] = [];
+
+    for await (
+      const file of walk("./routes", {
+        includeSymlinks: false,
+        exts: ["tsx"],
+        skip: [/_404.tsx/, /_app.tsx/, /home.tsx/, /index.tsx/],
+      })
+    ) {
+      route_names.push(file.name.split(".")[0]);
+    }
+
+    return await ctx.render({ route_names: route_names });
+  },
+};
+
+export default function Home(props: PageProps<IHandlerData>) {
+  const { route_names } = props.data;
+
   return (
-    <div class="px-4 py-8 mx-auto bg-[#86efac]">
-      <div class="max-w-screen-md mx-auto flex flex-col items-center justify-center">
-        <img
-          class="my-6"
-          src="/logo.svg"
-          width="128"
-          height="128"
-          alt="the Fresh logo: a sliced lemon dripping with juice"
-        />
-        <h1 class="text-4xl font-bold">Welcome to Fresh</h1>
-        <p class="my-4">
-          Try updating this message in the
-          <code class="mx-2">./routes/index.tsx</code> file, and refresh.
-        </p>
-      </div>
-    </div>
+    <MainDiv>
+      <CenterDiv>
+        <div
+          className={"flex flex-col justify-center content-center gap-y-2.5"}
+        >
+          {route_names.map((name) => (
+            <a
+              className={"animated_link text-3xl"}
+              href={`/${name}`}
+              key={name}
+            >
+              Go to {name}
+            </a>
+          ))}
+        </div>
+      </CenterDiv>
+    </MainDiv>
   );
 }

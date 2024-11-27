@@ -7,6 +7,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $animated_link from "./routes/animated_link.tsx";
 import * as $animated_list from "./routes/animated_list.tsx";
 import * as $buffer_loading from "./routes/buffer_loading.tsx";
+import * as $home from "./routes/home.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $tag_search from "./routes/tag_search.tsx";
 import * as $AnimatedList from "./islands/AnimatedList.tsx";
@@ -20,6 +21,7 @@ const manifest = {
     "./routes/animated_link.tsx": $animated_link,
     "./routes/animated_list.tsx": $animated_list,
     "./routes/buffer_loading.tsx": $buffer_loading,
+    "./routes/home.tsx": $home,
     "./routes/index.tsx": $index,
     "./routes/tag_search.tsx": $tag_search,
   },
