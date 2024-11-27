@@ -4,8 +4,16 @@
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",
     "cli": "echo \"import '\\$fresh/src/dev/cli.ts'\" | deno run --unstable -A -",
     "manifest": "deno task cli manifest $(pwd)",
-    "start": "deno run -A --watch=static/,routes/ dev.ts",
-    "build": "deno run -A dev.ts build",
+    "start": {
+      "description": "Start with dev build",
+      "command": "deno run -A --watch=static/,routes/ dev.ts",
+      "dependencies": ["autoprefix"]
+    },
+    "build": {
+      "description": "Ahead-of-time build the project",
+      "command": "deno run -A dev.ts build",
+      "dependencies": ["autoprefix"]
+    },
     "preview": "deno run -A main.ts",
     "autoprefix": "deno run -A static/autoprefix_css.ts",
     "update": "deno run -A -r https://fresh.deno.dev/update ."
