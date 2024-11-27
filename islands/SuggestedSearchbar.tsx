@@ -2,6 +2,7 @@ import { Ref, useEffect, useRef } from "preact/hooks";
 import PicoStyle from "../components/PicoStyle.tsx";
 import Trie from "../static/trie.ts";
 import { Signal, useSignal } from "@preact/signals";
+import { JSX } from "preact/jsx-runtime";
 
 export default function SuggestedSearchbar(
   props: { tags: Array<Array<string>> },
@@ -15,8 +16,10 @@ export default function SuggestedSearchbar(
     props.tags.forEach((tag) => tag_obj.value.multi_insert(tag));
   }, [props.tags]);
 
-  const searchbar_oninput = (event) => {
-    const input_value: string = event.target.value;
+  const searchbar_oninput: JSX.InputEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    const input_value: string = event.currentTarget.value;
 
     if (input_value === "") {
       suggestions.value = [];
@@ -32,17 +35,19 @@ export default function SuggestedSearchbar(
     }
   };
 
-  const suggestion_onclick = (event) => {
+  const suggestion_onclick: JSX.MouseEventHandler<HTMLLIElement> = (event) => {
     if (!searchbar_ref.current) {
       return;
     }
 
     suggestions.value = [];
 
-    searchbar_ref.current.value = event.target.innerText;
+    searchbar_ref.current.value = event.currentTarget.innerText;
   };
 
-  const suggestion_keydown = (event) => {
+  const suggestion_keydown: JSX.KeyboardEventHandler<HTMLLIElement> = (
+    event,
+  ) => {
     if (!searchbar_ref.current) {
       return;
     }
@@ -53,7 +58,7 @@ export default function SuggestedSearchbar(
 
     suggestions.value = [];
 
-    searchbar_ref.current.value = event.target.innerText;
+    searchbar_ref.current.value = event.currentTarget.innerText;
   };
 
   return (
