@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.animated_li {
+  list-style: none;
+  background: blueviolet;
+  color: white;
+  height: 0;
+  line-height: 2em;
+  margin: 0;
+  padding: 0 0.5em;
+  overflow: hidden;
+  width: 10em;
+}
+
+.animated_li.show {
+  height: 2em;
+  margin: 2px 0;
+}
+
+.fade li {
+  transition: all 0.4s ease-out;
+  opacity: 0;
+  height: 2em;
+}
+
+.fade .animated_li.show {
+  opacity: 1;
+}
+
+.slide-fade li {
+  transition: all 0.4s ease-out;
+  opacity: 0;
+}
+
+.slide-fade .animated_li.show {
+  opacity: 1;
+}
+
+.swing {
+  perspective: 100px;
+}
+
+.swing li {
+  opacity: 0;
+  transform: rotateX(-90deg);
+  transition: all 0.5s ease-in;
+}
+
+.swing .animated_li.show {
+  opacity: 1;
+  transform: none;
+  transition: all 0.5s ease-out;
+}
