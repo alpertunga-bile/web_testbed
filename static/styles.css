@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --loading-loaded-color: rgb(222, 24, 205, 1);
+  --loading-loaded-color: rgb(222, 24, 205);
   --loading-unloaded-color: rgba(178, 178, 178, 0);
   --loading-text-loaded-color: rgb(24, 64, 222);
   --loading-text-unloaded-color: rgba(178, 178, 178, 0);
@@ -120,4 +120,23 @@
 
 .layer3 {
   animation-name: layer3;
+}
+
+.animated_link {
+  color: aqua;
+  text-decoration: none;
+  background-image: linear-gradient(
+    currentColor,
+    currentColor
+  );
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 4px;
+  transition: background-size cubic-bezier(0, 0.5, 0, 1) 0.3s;
+}
+
+.animated_link:hover,
+.animated_link:focus {
+  text-decoration: none;
+  background-size: 100% 4px;
 }
