@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --loading-loaded-color: rgba(222, 24, 205, 1);
+  --loading-loaded-color: rgb(222, 24, 205, 1);
   --loading-unloaded-color: rgba(178, 178, 178, 0);
+  --loading-text-loaded-color: rgb(24, 64, 222);
+  --loading-text-unloaded-color: rgba(178, 178, 178, 0);
 }
 
 .animated_li {
@@ -59,40 +61,48 @@
   transition: all 0.5s ease-out;
 }
 
-
 @keyframes layer1 {
   0%, 65% {
     fill: var(--loading-unloaded-color);
+    color: var(--loading-text-unloaded-color);
   }
   75%, 85% {
     fill: var(--loading-loaded-color);
+    color: var(--loading-text-loaded-color);
   }
   92%, 100% {
     fill: var(--loading-unloaded-color);
+    color: var(--loading-text-unloaded-color);
   }
 }
 
 @keyframes layer2 {
   0%, 40% {
     fill: var(--loading-unloaded-color);
+    color: var(--loading-text-unloaded-color);
   }
   50%, 86% {
     fill: var(--loading-loaded-color);
+    color: var(--loading-text-loaded-color);
   }
   93%, 100% {
     fill: var(--loading-unloaded-color);
+    color: var(--loading-text-unloaded-color);
   }
 }
 
 @keyframes layer3 {
   0%, 15% {
     fill: var(--loading-unloaded-color);
+    color: var(--loading-text-unloaded-color);
   }
   25%, 90% {
     fill: var(--loading-loaded-color);
+    color: var(--loading-text-loaded-color);
   }
   100% {
     fill: var(--loading-unloaded-color);
+    color: var(--loading-text-unloaded-color);
   }
 }
 
