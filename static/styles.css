@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --loading-loaded-color: rgba(222, 24, 205, 1);
+  --loading-unloaded-color: rgba(178, 178, 178, 0);
+}
+
 .animated_li {
   list-style: none;
   background: blueviolet;
@@ -52,4 +57,57 @@
   opacity: 1;
   transform: none;
   transition: all 0.5s ease-out;
+}
+
+
+@keyframes layer1 {
+  0%, 65% {
+    fill: var(--loading-unloaded-color);
+  }
+  75%, 85% {
+    fill: var(--loading-loaded-color);
+  }
+  92%, 100% {
+    fill: var(--loading-unloaded-color);
+  }
+}
+
+@keyframes layer2 {
+  0%, 40% {
+    fill: var(--loading-unloaded-color);
+  }
+  50%, 86% {
+    fill: var(--loading-loaded-color);
+  }
+  93%, 100% {
+    fill: var(--loading-unloaded-color);
+  }
+}
+
+@keyframes layer3 {
+  0%, 15% {
+    fill: var(--loading-unloaded-color);
+  }
+  25%, 90% {
+    fill: var(--loading-loaded-color);
+  }
+  100% {
+    fill: var(--loading-unloaded-color);
+  }
+}
+
+.layer {
+  animation: 4s linear infinite;
+}
+
+.layer1 {
+  animation-name: layer1;
+}
+
+.layer2 {
+  animation-name: layer2;
+}
+
+.layer3 {
+  animation-name: layer3;
 }

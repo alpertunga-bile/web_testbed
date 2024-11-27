@@ -3,7 +3,7 @@ import CenterDiv from "../components/CenterDiv.tsx";
 import MainDiv from "../components/MainDiv.tsx";
 import AnimatedList from "../islands/AnimatedList.tsx";
 
-export default function AnimatedListPage(page: PageProps) {
+export default function AnimatedListPage(_page: PageProps) {
   return (
     <MainDiv>
       <CenterDiv>
