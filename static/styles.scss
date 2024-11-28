@@ -19,6 +19,7 @@
   padding: 0 0.5em;
   overflow: hidden;
   width: 10em;
+  will-change: height margin opacity transform;
 }
 
 .animated_li.show {
@@ -122,14 +123,17 @@ $loading-text-unloaded-color: rgba(178, 178, 178, 0);
 
 .layer1 {
   animation-name: layer1;
+  will-change: fill color;
 }
 
 .layer2 {
   animation-name: layer2;
+  will-change: fill color;
 }
 
 .layer3 {
   animation-name: layer3;
+  will-change: fill color;
 }
 
 /*
@@ -148,6 +152,7 @@ $loading-text-unloaded-color: rgba(178, 178, 178, 0);
   background-repeat: no-repeat;
   background-size: 0% 4px;
   transition: background-size cubic-bezier(0, 0.5, 0, 1) 0.3s;
+  will-change: background-size;
 }
 
 .animated_link:hover,
@@ -173,6 +178,7 @@ $animated-circle-radius: 1.5em;
   transform-origin: center center;
   animation: move-circle-fade 4s infinite;
   opacity: 0;
+  will-change: transform opacity width height;
 }
 
 @for $num from 1 through 8 {
@@ -183,6 +189,7 @@ $animated-circle-radius: 1.5em;
 
 .animated_circle_parent {
   animation: move-parent 4s linear infinite;
+  will-change: transform;
 }
 
 @keyframes move-parent {
