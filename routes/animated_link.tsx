@@ -6,8 +6,8 @@ export default function AnimatedLink(_props: PageProps) {
   return (
     <MainDiv>
       <CenterDiv>
-        <a href={"/buffer_loading"} className={"animated_link text-4xl"}>
-          GO TO THE LOADING PAGE
+        <a href={"/home"} className={"animated_link text-4xl"}>
+          GO TO THE HOME PAGE
         </a>
       </CenterDiv>
     </MainDiv>
