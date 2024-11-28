@@ -1,19 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --loading-loaded-color: rgb(222, 24, 205);
-  --loading-unloaded-color: rgba(178, 178, 178, 0);
-  --loading-text-loaded-color: rgb(24, 64, 222);
-  --loading-text-unloaded-color: rgba(178, 178, 178, 0);
-}
-
 /*
  * -------------------------------------------------------------------------------------
  * -- Animated List
 */
-
 .animated_li {
   list-style: none;
   background: blueviolet;
@@ -70,52 +61,48 @@
  * -------------------------------------------------------------------------------------
  * -- Buffer Loading
 */
-
 @keyframes layer1 {
   0%, 65% {
-    fill: var(--loading-unloaded-color);
-    color: var(--loading-text-unloaded-color);
+    fill: rgba(178, 178, 178, 0);
+    color: rgba(178, 178, 178, 0);
   }
   75%, 85% {
-    fill: var(--loading-loaded-color);
-    color: var(--loading-text-loaded-color);
+    fill: rgb(222, 24, 205);
+    color: rgb(24, 64, 222);
   }
   92%, 100% {
-    fill: var(--loading-unloaded-color);
-    color: var(--loading-text-unloaded-color);
+    fill: rgba(178, 178, 178, 0);
+    color: rgba(178, 178, 178, 0);
   }
 }
-
 @keyframes layer2 {
   0%, 40% {
-    fill: var(--loading-unloaded-color);
-    color: var(--loading-text-unloaded-color);
+    fill: rgba(178, 178, 178, 0);
+    color: rgba(178, 178, 178, 0);
   }
   50%, 86% {
-    fill: var(--loading-loaded-color);
-    color: var(--loading-text-loaded-color);
+    fill: rgb(222, 24, 205);
+    color: rgb(24, 64, 222);
   }
   93%, 100% {
-    fill: var(--loading-unloaded-color);
-    color: var(--loading-text-unloaded-color);
+    fill: rgba(178, 178, 178, 0);
+    color: rgba(178, 178, 178, 0);
   }
 }
-
 @keyframes layer3 {
   0%, 15% {
-    fill: var(--loading-unloaded-color);
-    color: var(--loading-text-unloaded-color);
+    fill: rgba(178, 178, 178, 0);
+    color: rgba(178, 178, 178, 0);
   }
   25%, 90% {
-    fill: var(--loading-loaded-color);
-    color: var(--loading-text-loaded-color);
+    fill: rgb(222, 24, 205);
+    color: rgb(24, 64, 222);
   }
   100% {
-    fill: var(--loading-unloaded-color);
-    color: var(--loading-text-unloaded-color);
+    fill: rgba(178, 178, 178, 0);
+    color: rgba(178, 178, 178, 0);
   }
 }
-
 .layer {
   animation: 4s linear infinite;
 }
@@ -136,14 +123,10 @@
  * -------------------------------------------------------------------------------------
  * -- Animated Link
 */
-
 .animated_link {
   color: aqua;
   text-decoration: none;
-  background-image: linear-gradient(
-    currentColor,
-    currentColor
-  );
+  background-image: linear-gradient(currentColor, currentColor);
   background-position: 0% 100%;
   background-repeat: no-repeat;
   background-size: 0% 4px;
@@ -154,4 +137,120 @@
 .animated_link:focus {
   text-decoration: none;
   background-size: 100% 4px;
+}
+
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Circle Animation
+*/
+.animated_circle {
+  position: absolute;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 100%;
+  background-color: aquamarine;
+  transform-origin: center center;
+  animation: move-circle-fade 4s infinite;
+  opacity: 0;
+}
+
+.animated_circle:nth-child(1) {
+  animation-delay: 0.5s;
+}
+
+.animated_circle:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.animated_circle:nth-child(3) {
+  animation-delay: 1.5s;
+}
+
+.animated_circle:nth-child(4) {
+  animation-delay: 2s;
+}
+
+.animated_circle:nth-child(5) {
+  animation-delay: 2.5s;
+}
+
+.animated_circle:nth-child(6) {
+  animation-delay: 3s;
+}
+
+.animated_circle:nth-child(7) {
+  animation-delay: 3.5s;
+}
+
+.animated_circle:nth-child(8) {
+  animation-delay: 4s;
+}
+
+.animated_circle_parent {
+  animation: move-parent 4s linear infinite;
+}
+
+@keyframes move-parent {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes move-circle-fade {
+  0% {
+    transform: translate(50px, 50px);
+    opacity: 1;
+    width: 1.5em;
+    height: 1.5em;
+  }
+  12% {
+    transform: rotateZ(45deg) translate(50px, 50px);
+    opacity: 0.875;
+    width: 1.3125em;
+    height: 1.3125em;
+  }
+  25% {
+    transform: rotateZ(90deg) translate(50px, 50px);
+    opacity: 0.75;
+    width: 1.125em;
+    height: 1.125em;
+  }
+  37% {
+    transform: rotateZ(135deg) translate(50px, 50px);
+    opacity: 0.625;
+    width: 0.9375em;
+    height: 0.9375em;
+  }
+  50% {
+    transform: rotateZ(180deg) translate(50px, 50px);
+    opacity: 0.5;
+    width: 0.75em;
+    height: 0.75em;
+  }
+  62% {
+    transform: rotateZ(225deg) translate(50px, 50px);
+    opacity: 0.375;
+    width: 0.5625em;
+    height: 0.5625em;
+  }
+  75% {
+    transform: rotateZ(270deg) translate(50px, 50px);
+    opacity: 0.25;
+    width: 0.375em;
+    height: 0.375em;
+  }
+  87% {
+    transform: rotateZ(315deg) translate(50px, 50px);
+    opacity: 0.1875;
+    width: 0.28125em;
+    height: 0.28125em;
+  }
+  100% {
+    transform: rotateZ(350deg) translate(50px, 50px);
+    opacity: 0.125;
+    width: 0.1875em;
+    height: 0.1875em;
+  }
 }

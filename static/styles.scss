@@ -1,3 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Animated List
+*/
+
+.animated_li {
+  list-style: none;
+  background: blueviolet;
+  color: white;
+  height: 0;
+  line-height: 2em;
+  margin: 0;
+  padding: 0 0.5em;
+  overflow: hidden;
+  width: 10em;
+}
+
+.animated_li.show {
+  height: 2em;
+  margin: 2px 0;
+}
+
+.fade li {
+  transition: all 0.4s ease-out;
+  opacity: 0;
+  height: 2em;
+}
+
+.fade .animated_li.show {
+  opacity: 1;
+}
+
+.slide-fade li {
+  transition: all 0.4s ease-out;
+  opacity: 0;
+}
+
+.slide-fade .animated_li.show {
+  opacity: 1;
+}
+
+.swing {
+  perspective: 100px;
+}
+
+.swing li {
+  opacity: 0;
+  transform: rotateX(-90deg);
+  transition: all 0.5s ease-in;
+}
+
+.swing .animated_li.show {
+  opacity: 1;
+  transform: none;
+  transition: all 0.5s ease-out;
+}
+
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Buffer Loading
+*/
+
+$loading-loaded-color: rgb(222, 24, 205);
+$loading-unloaded-color: rgba(178, 178, 178, 0);
+$loading-text-loaded-color: rgb(24, 64, 222);
+$loading-text-unloaded-color: rgba(178, 178, 178, 0);
+
+@keyframes layer1 {
+  0%, 65% {
+    fill: $loading-unloaded-color;
+    color: $loading-text-unloaded-color;
+  }
+  75%, 85% {
+    fill: $loading-loaded-color;
+    color: $loading-text-loaded-color;
+  }
+  92%, 100% {
+    fill: $loading-unloaded-color;
+    color: $loading-text-unloaded-color;
+  }
+}
+
+@keyframes layer2 {
+  0%, 40% {
+    fill: $loading-unloaded-color;
+    color: $loading-text-unloaded-color;
+  }
+  50%, 86% {
+    fill: $loading-loaded-color;
+    color: $loading-text-loaded-color;
+  }
+  93%, 100% {
+    fill: $loading-unloaded-color;
+    color: $loading-text-unloaded-color;
+  }
+}
+
+@keyframes layer3 {
+  0%, 15% {
+    fill: $loading-unloaded-color;
+    color: $loading-text-unloaded-color;
+  }
+  25%, 90% {
+    fill: $loading-loaded-color;
+    color: $loading-text-loaded-color;
+  }
+  100% {
+    fill: $loading-unloaded-color;
+    color: $loading-text-unloaded-color;
+  }
+}
+
+.layer {
+  animation: 4s linear infinite;
+}
+
+.layer1 {
+  animation-name: layer1;
+}
+
+.layer2 {
+  animation-name: layer2;
+}
+
+.layer3 {
+  animation-name: layer3;
+}
+
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Animated Link
+*/
+
+.animated_link {
+  color: aqua;
+  text-decoration: none;
+  background-image: linear-gradient(
+    currentColor,
+    currentColor
+  );
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 4px;
+  transition: background-size cubic-bezier(0, 0.5, 0, 1) 0.3s;
+}
+
+.animated_link:hover,
+.animated_link:focus {
+  text-decoration: none;
+  background-size: 100% 4px;
+}
+
+
 /*
  * -------------------------------------------------------------------------------------
  * -- Circle Animation
