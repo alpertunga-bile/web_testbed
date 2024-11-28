@@ -46,7 +46,7 @@ export default function BufferLoadingPage(_props: PageProps) {
       <CenterDiv>
         <ElemRow>
           <LoadingObject />
-          <br></br>
+          <div className={"px-2"}></div>
           <h2 className={"text-center text-8xl layer layer3"}>Loa</h2>
           <h2 className={"text-center text-8xl layer layer2"}>di</h2>
           <h2 className={"text-center text-8xl layer layer1"}>ng</h2>
