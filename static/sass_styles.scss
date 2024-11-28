@@ -1,0 +1,103 @@
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Circle Animation
+*/
+
+$animated-circle-radius: 1.5em;
+
+.animated_circle {
+  position: absolute;
+  width: $animated-circle-radius;
+  height: $animated-circle-radius;
+  border-radius: 100%;
+  background-color:aquamarine;
+  transform-origin: center center;
+  animation: move-circle-fade 4s infinite;
+  opacity: 0;
+}
+
+@for $num from 1 through 8 {
+  .animated_circle:nth-child(#{$num}) {
+      animation-delay: $num * 0.5s;
+  }
+}
+
+.animated_circle_parent {
+  animation: move-parent 4s linear infinite;
+}
+
+@keyframes move-parent {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes move-circle-fade {
+    0% {
+      transform: translate(50px, 50px);
+      opacity: 1;
+      width: $animated-circle-radius;
+      height: $animated-circle-radius;
+    }
+
+    12% {
+      transform: rotateZ(45deg) translate(50px, 50px);
+      opacity: 1 - calc(1 / 8);
+      width: $animated-circle-radius - calc($animated-circle-radius * (1 / 8));
+      height: $animated-circle-radius - calc($animated-circle-radius * (1 / 8));
+    }
+    
+    25% {
+      transform: rotateZ(90deg) translate(50px, 50px);
+      opacity: 1 - calc(2 / 8);
+      width: $animated-circle-radius - calc($animated-circle-radius * (2 / 8));
+      height: $animated-circle-radius - calc($animated-circle-radius * (2 / 8));
+    }
+
+    37% {
+      transform: rotateZ(135deg) translate(50px, 50px);
+      opacity: 1 - calc(3 / 8);
+      width: $animated-circle-radius - calc($animated-circle-radius * (3 / 8));
+      height: $animated-circle-radius - calc($animated-circle-radius * (3 / 8));
+    }
+
+    50% {
+      transform: rotateZ(180deg) translate(50px, 50px);
+      opacity: 1 - calc(4 / 8);
+      width: $animated-circle-radius - calc($animated-circle-radius * (4 / 8));
+      height: $animated-circle-radius - calc($animated-circle-radius * (4 / 8));
+    }
+
+    62% {
+      transform: rotateZ(225deg) translate(50px, 50px);
+      opacity: 1 - calc(5 / 8);
+      width: $animated-circle-radius - calc($animated-circle-radius * (5 / 8));
+      height: $animated-circle-radius - calc($animated-circle-radius * (5 / 8));
+    }
+
+    75% {
+      transform: rotateZ(270deg) translate(50px, 50px);
+      opacity: 1 - calc(6 / 8);
+      width: $animated-circle-radius - calc($animated-circle-radius * (6 / 8));
+      height: $animated-circle-radius - calc($animated-circle-radius * (6 / 8));
+    }
+
+    87% {
+      transform: rotateZ(315deg) translate(50px, 50px);
+      opacity: 1 - calc(6.5 / 8);
+      width: $animated-circle-radius - calc($animated-circle-radius * (6.5 / 8));
+      height: $animated-circle-radius - calc($animated-circle-radius * (6.5 / 8));
+    }
+
+    100% {
+      transform: rotateZ(350deg) translate(50px, 50px);
+      opacity: 1 - calc(7 / 8);
+      width: $animated-circle-radius - calc($animated-circle-radius * (7 / 8));
+      height: $animated-circle-radius - calc($animated-circle-radius * (7 / 8));
+    }
+}
+  

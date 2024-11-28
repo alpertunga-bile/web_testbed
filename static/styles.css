@@ -9,6 +9,11 @@
   --loading-text-unloaded-color: rgba(178, 178, 178, 0);
 }
 
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Animated List
+*/
+
 .animated_li {
   list-style: none;
   background: blueviolet;
@@ -60,6 +65,11 @@
   transform: none;
   transition: all 0.5s ease-out;
 }
+
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Buffer Loading
+*/
 
 @keyframes layer1 {
   0%, 65% {
@@ -121,6 +131,11 @@
 .layer3 {
   animation-name: layer3;
 }
+
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Animated Link
+*/
 
 .animated_link {
   color: aqua;
