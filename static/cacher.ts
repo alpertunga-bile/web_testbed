@@ -3,6 +3,7 @@ import { decode, encode } from "cbor-x";
 import { exists } from "$std/fs/exists.ts";
 import * as path from "jsr:@std/path";
 import { difference, format, parse } from "@std/datetime";
+import { gunzip, gzip } from "jsr:@deno-library/compress";
 
 export enum CacherCompression {
   INVALID_UTF16,
@@ -60,11 +61,14 @@ export class Cacher {
   private async save_file(
     data_value: string,
     bin_filepath: string,
-    _gzip_bin_filepath: string,
   ) {
     const info: CacherInfo = {
       compress_type: CacherCompression[this.options.compression_type],
-      creation_time: format(new Date(), this.time_formatting),
+      creation_time: format(
+        new Date(),
+        this.time_formatting,
+        { timeZone: "UTC" },
+      ),
       remaining_unit: CacherDateRemainingUnit[this.options.remaining_unit],
       remaining_time: this.options.remaining_time,
       data: this.compress(data_value),
@@ -74,25 +78,33 @@ export class Cacher {
       encode(JSON.stringify(info)),
     );
 
-    await Deno.writeFile(bin_filepath, encoded_data);
+    await Deno.writeFile(bin_filepath, gzip(encoded_data));
   }
 
   private async main_from(data: string, filename: string, overwrite: boolean) {
-    const { bin_filepath, gzip_bin_filepath } = this.get_filepaths(filename);
-    const is_exists = await exists(gzip_bin_filepath);
+    const bin_filepath = this.get_bin_filepath(filename);
+    const is_exists = await exists(bin_filepath);
 
     if (!overwrite && is_exists) {
       return;
     }
 
-    await this.save_file(data, bin_filepath, gzip_bin_filepath);
+    await this.save_file(data, bin_filepath);
   }
 
-  async from_str(value: string, filename: string, overwrite: boolean = true) {
+  async from_str(
+    value: string,
+    filename: string,
+    overwrite: boolean = true,
+  ): Promise<void> {
     await this.main_from(value, filename, overwrite);
   }
 
-  async from_obj(value: object, filename: string, overwrite: boolean = true) {
+  async from_obj(
+    value: object,
+    filename: string,
+    overwrite: boolean = true,
+  ): Promise<void> {
     await this.main_from(JSON.stringify(value), filename, overwrite);
   }
 
@@ -100,7 +112,7 @@ export class Cacher {
     value: Map<K, V>,
     filename: string,
     overwrite: boolean = true,
-  ) {
+  ): Promise<void> {
     await this.main_from(
       JSON.stringify(Object.fromEntries(value)),
       filename,
@@ -109,8 +121,9 @@ export class Cacher {
   }
 
   async get_data(filename: string): Promise<CacherReturnInfo> {
-    const { bin_filepath } = this.get_filepaths(filename);
+    const bin_filepath = this.get_bin_filepath(filename);
     const is_exists = await exists(bin_filepath);
+
     const cacher_return_info: CacherReturnInfo = {
       is_expired: false,
       data: "",
@@ -122,7 +135,7 @@ export class Cacher {
     }
 
     const decoded_data = decode(
-      await Deno.readFile(bin_filepath),
+      gunzip(await Deno.readFile(bin_filepath)),
     );
 
     const data: CacherInfo = JSON.parse(decoded_data);
@@ -141,7 +154,7 @@ export class Cacher {
   }
 
   async is_cache_file_exists(filename: string): Promise<boolean> {
-    const { bin_filepath } = this.get_filepaths(filename);
+    const bin_filepath = this.get_bin_filepath(filename);
 
     return await exists(bin_filepath);
   }
@@ -215,20 +228,15 @@ export class Cacher {
     return remaining >= remaining_time;
   }
 
-  private get_filepaths(
+  private get_bin_filepath(
     filename: string,
-  ): { bin_filepath: string; gzip_bin_filepath: string } {
+  ): string {
     const bin_filename = !filename.endsWith(".bin")
       ? filename + ".bin"
       : filename;
-    const gzip_bin_filename = bin_filename + ".gz";
     const bin_filepath = path.join(this.options.save_path, bin_filename);
-    const gzip_bin_filepath = path.join(
-      this.options.save_path,
-      gzip_bin_filename,
-    );
 
-    return { bin_filepath: bin_filepath, gzip_bin_filepath: gzip_bin_filepath };
+    return bin_filepath;
   }
 
   private time_formatting: string = "dd-MM-yyyy HH:mm:ss.SSS";
