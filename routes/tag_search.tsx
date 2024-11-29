@@ -1,9 +1,7 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
-import { exists } from "$std/fs/exists.ts";
 import { get_tags_by_char } from "../static/utilities.ts";
-import { decode, encode } from "cbor-x";
 
-import { difference, format, parse } from "@std/datetime";
+import { Cacher, default_cacher_options } from "../static/cacher.ts";
 
 /*
  * ------------------------------------------------------------------------------
@@ -14,8 +12,6 @@ import MainDiv from "../components/MainDiv.tsx";
 import SuggestedSearchbar from "../islands/SuggestedSearchbar.tsx";
 
 const tag_head_chars = "abcdefghijklmnopqrstuvwxyz123456789".split("");
-const tags_binary_filepath = "./static/tags.bin";
-const date_formating = "dd-MM-yyyy";
 
 /*
  * ------------------------------------------------------------------------------
@@ -26,8 +22,6 @@ interface ITagSearchData {
 }
 
 interface ITagInfo {
-  creation_time: string;
-  remaining_day: number;
   tags: Array<Array<string>>;
 }
 
@@ -35,52 +29,22 @@ interface ITagInfo {
  * ------------------------------------------------------------------------------
  * -- Functions
  */
-async function create_cache_file(tag_sets: Set<string>[]) {
-  const tag_info: ITagInfo = {
-    creation_time: format(new Date(), date_formating),
-    remaining_day: 5,
-    tags: [],
-  };
-
-  tag_info.tags = tag_sets.map((set_value) => Array.from(set_value));
-
-  const json_array = new Uint8Array(encode(JSON.stringify(tag_info)));
-
-  await Deno.writeFile(tags_binary_filepath, json_array);
-}
-
-function check_if_cache_expired(
-  created_time: string | undefined,
-  expire_day: number = 5,
-): boolean {
-  if (!created_time) {
-    return false;
-  }
-
-  const created_time_date = parse(created_time, date_formating);
-  const current_time_date = new Date();
-
-  const day_between = difference(created_time_date, current_time_date).days ||
-    0;
-
-  return day_between >= expire_day;
-}
 
 export const handler: Handlers<ITagSearchData> = {
   async GET(_req, ctx) {
-    const is_bin_exists = await exists(tags_binary_filepath);
+    const cache_filename: string = "tags";
+    const cacher_options = default_cacher_options;
+    const cacher: Cacher = new Cacher(cacher_options);
 
-    if (is_bin_exists) {
-      const data = await Deno.readFile(tags_binary_filepath);
-      const tag_info: ITagInfo = JSON.parse(decode(data));
+    const is_exists = await cacher.is_cache_file_exists(cache_filename);
 
-      if (
-        !check_if_cache_expired(tag_info.creation_time, tag_info.remaining_day)
-      ) {
+    if (is_exists) {
+      const return_info = await cacher.get_data(cache_filename);
+      const tag_info: ITagInfo = JSON.parse(return_info.data);
+
+      if (!return_info.is_expired) {
         return ctx.render({ tag_values: tag_info.tags });
       }
-
-      await Deno.remove(tags_binary_filepath);
     }
 
     const tag_promises: Promise<Set<string>>[] = [];
@@ -93,7 +57,14 @@ export const handler: Handlers<ITagSearchData> = {
 
     const tag_values = tag_sets.map((value) => Array.from(value));
 
-    await create_cache_file(tag_sets);
+    const tag_info: ITagInfo = {
+      tags: tag_sets.map((set_value) => Array.from(set_value)),
+    };
+
+    await cacher.from_obj(
+      tag_info,
+      cache_filename,
+    );
 
     return ctx.render({ tag_values: tag_values });
   },
