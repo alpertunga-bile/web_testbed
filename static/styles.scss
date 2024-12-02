@@ -267,3 +267,23 @@ $animated-circle-radius: 1.5em;
     }
 }
   
+/*
+ * -------------------------------------------------------------------------------------
+ * -- Border Mouse Interaction
+*/
+
+$animated-border-color: rgb(170, 15, 150);
+
+.animated_border {
+  position: relative;
+  width: 728px;
+  height: 512px;
+  border-color: $animated-border-color;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: 0 0 0 0 $animated-border-color;
+  border-radius: 30px;
+
+  transition: border-top-color border-bottom-color border-left-color border-right-color 0.25s ease-in;
+  transition: box-shadow 0.1s linear;
+}
