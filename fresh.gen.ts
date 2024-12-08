@@ -8,9 +8,9 @@ import * as $animated_border from "./routes/animated_border.tsx";
 import * as $animated_link from "./routes/animated_link.tsx";
 import * as $animated_list from "./routes/animated_list.tsx";
 import * as $buffer_loading from "./routes/buffer_loading.tsx";
+import * as $card_flip from "./routes/card_flip.tsx";
 import * as $circle_animation from "./routes/circle_animation.tsx";
 import * as $home from "./routes/home.tsx";
-import * as $image_card_flip from "./routes/image_card_flip.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $tag_search from "./routes/tag_search.tsx";
 import * as $AnimatedBorder from "./islands/AnimatedBorder.tsx";
@@ -26,9 +26,9 @@ const manifest = {
     "./routes/animated_link.tsx": $animated_link,
     "./routes/animated_list.tsx": $animated_list,
     "./routes/buffer_loading.tsx": $buffer_loading,
+    "./routes/card_flip.tsx": $card_flip,
     "./routes/circle_animation.tsx": $circle_animation,
     "./routes/home.tsx": $home,
-    "./routes/image_card_flip.tsx": $image_card_flip,
     "./routes/index.tsx": $index,
     "./routes/tag_search.tsx": $tag_search,
   },
