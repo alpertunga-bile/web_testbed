@@ -4,7 +4,7 @@
 /*
  * -------------------------------------------------------------------------------------
  * -- Animated List
-*/
+ */
 .animated_li {
   list-style: none;
   background: blueviolet;
@@ -61,7 +61,7 @@
 /*
  * -------------------------------------------------------------------------------------
  * -- Buffer Loading
-*/
+ */
 @keyframes layer1 {
   0%, 65% {
     fill: rgba(178, 178, 178, 0);
@@ -126,7 +126,7 @@
 /*
  * -------------------------------------------------------------------------------------
  * -- Animated Link
-*/
+ */
 .animated_link {
   color: aqua;
   text-decoration: none;
@@ -147,7 +147,7 @@
 /*
  * -------------------------------------------------------------------------------------
  * -- Circle Animation
-*/
+ */
 .animated_circle {
   position: absolute;
   width: 1.5em;
@@ -264,7 +264,7 @@
 /*
  * -------------------------------------------------------------------------------------
  * -- Border Mouse Interaction
-*/
+ */
 .animated_border {
   position: relative;
   width: 728px;
@@ -274,14 +274,15 @@
   border-width: 2px;
   box-shadow: 0 0 0 0 rgb(170, 15, 150);
   border-radius: 30px;
-  transition: border-top-color border-bottom-color border-left-color border-right-color 0.25s ease-in;
+  transition: border-top-color border-bottom-color border-left-color
+    border-right-color 0.25s ease-in;
   transition: box-shadow 0.1s linear;
 }
 
 /*
  * -------------------------------------------------------------------------------------
  * -- Image Card flip
-*/
+ */
 .card {
   position: relative;
   width: 256px;

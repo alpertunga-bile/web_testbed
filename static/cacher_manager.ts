@@ -1,6 +1,11 @@
 import { existsSync } from "$std/fs/exists.ts";
-import { Cacher, CacherReturnInfo } from "./cacher.ts";
-import { CacherCompression, CacherDateRemainingUnit } from "./cacher.ts";
+import { Cacher } from "./cacher.ts";
+import {
+  CacherCompression,
+  CacherDateRemainingUnit,
+  CacherOptions,
+  CacherReturnInfo,
+} from "./cacher_wasm/cacher_wasm.js";
 import * as crypto from "jsr:@std/crypto";
 import * as path from "jsr:@std/path";
 
@@ -15,8 +20,8 @@ export interface CacherManagerOptions {
 
 export const default_cacher_manager_options: CacherManagerOptions = {
   save_path: "./static",
-  compression_type: CacherCompression.VALID_UTF16,
-  remaining_unit: CacherDateRemainingUnit.DAYS,
+  compression_type: CacherCompression.ValidUtf16,
+  remaining_unit: CacherDateRemainingUnit.Days,
   remaining_time: 5,
   max_cache_file: 128,
   hash_filename: true,
@@ -88,12 +93,13 @@ export class CacherManager {
       Deno.mkdirSync(options.save_path);
     }
 
-    this.cacher = new Cacher({
-      save_path: options.save_path,
-      compression_type: options.compression_type,
-      remaining_unit: options.remaining_unit,
-      remaining_time: options.remaining_time,
-    });
+    const cacher_opts = new CacherOptions();
+    cacher_opts.save_path = options.save_path;
+    cacher_opts.compression_type = options.compression_type;
+    cacher_opts.remaining_time_unit = options.remaining_unit;
+    cacher_opts.remaining_time = BigInt(options.remaining_time);
+
+    this.cacher = new Cacher(cacher_opts);
 
     this.file_map = new CacherLRUCache(options.max_cache_file);
 
