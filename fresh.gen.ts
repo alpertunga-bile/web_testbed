@@ -10,7 +10,7 @@ import * as $animated_list from "./routes/animated_list.tsx";
 import * as $buffer_loading from "./routes/buffer_loading.tsx";
 import * as $card_flip from "./routes/card_flip.tsx";
 import * as $circle_animation from "./routes/circle_animation.tsx";
-import * as $grid_example from "./routes/grid_example.tsx";
+import * as $gradient_border from "./routes/gradient_border.tsx";
 import * as $home from "./routes/home.tsx";
 import * as $index from "./routes/index.tsx";
 import * as $tag_search from "./routes/tag_search.tsx";
@@ -29,7 +29,7 @@ const manifest = {
     "./routes/buffer_loading.tsx": $buffer_loading,
     "./routes/card_flip.tsx": $card_flip,
     "./routes/circle_animation.tsx": $circle_animation,
-    "./routes/grid_example.tsx": $grid_example,
+    "./routes/gradient_border.tsx": $gradient_border,
     "./routes/home.tsx": $home,
     "./routes/index.tsx": $index,
     "./routes/tag_search.tsx": $tag_search,

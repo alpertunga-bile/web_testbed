@@ -2,12 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 /*
  * -------------------------------------------------------------------------------------
  * -- Animated List
-*/
+ */
 
 .animated_li {
   list-style: none;
@@ -65,7 +63,7 @@
 /*
  * -------------------------------------------------------------------------------------
  * -- Buffer Loading
-*/
+ */
 
 $loading-loaded-color: rgb(222, 24, 205);
 $loading-unloaded-color: rgba(178, 178, 178, 0);
@@ -139,7 +137,7 @@ $loading-text-unloaded-color: rgba(178, 178, 178, 0);
 /*
  * -------------------------------------------------------------------------------------
  * -- Animated Link
-*/
+ */
 
 .animated_link {
   color: aqua;
@@ -161,11 +159,10 @@ $loading-text-unloaded-color: rgba(178, 178, 178, 0);
   background-size: 100% 4px;
 }
 
-
 /*
  * -------------------------------------------------------------------------------------
  * -- Circle Animation
-*/
+ */
 
 $animated-circle-radius: 1.5em;
 
@@ -174,7 +171,7 @@ $animated-circle-radius: 1.5em;
   width: $animated-circle-radius;
   height: $animated-circle-radius;
   border-radius: 100%;
-  background-color:aquamarine;
+  background-color: aquamarine;
   transform-origin: center center;
   animation: move-circle-fade 4s infinite;
   opacity: 0;
@@ -183,7 +180,7 @@ $animated-circle-radius: 1.5em;
 
 @for $num from 1 through 8 {
   .animated_circle:nth-child(#{$num}) {
-      animation-delay: $num * 0.5s;
+    animation-delay: $num * 0.5s;
   }
 }
 
@@ -203,74 +200,74 @@ $animated-circle-radius: 1.5em;
 }
 
 @keyframes move-circle-fade {
-    0% {
-      transform: translate(50px, 50px);
-      opacity: 1;
-      width: $animated-circle-radius;
-      height: $animated-circle-radius;
-    }
+  0% {
+    transform: translate(50px, 50px);
+    opacity: 1;
+    width: $animated-circle-radius;
+    height: $animated-circle-radius;
+  }
 
-    12% {
-      transform: rotateZ(45deg) translate(50px, 50px);
-      opacity: 1 - calc(1 / 8);
-      width: $animated-circle-radius - calc($animated-circle-radius * (1 / 8));
-      height: $animated-circle-radius - calc($animated-circle-radius * (1 / 8));
-    }
-    
-    25% {
-      transform: rotateZ(90deg) translate(50px, 50px);
-      opacity: 1 - calc(2 / 8);
-      width: $animated-circle-radius - calc($animated-circle-radius * (2 / 8));
-      height: $animated-circle-radius - calc($animated-circle-radius * (2 / 8));
-    }
+  12% {
+    transform: rotateZ(45deg) translate(50px, 50px);
+    opacity: 1 - calc(1 / 8);
+    width: $animated-circle-radius - calc($animated-circle-radius * (1 / 8));
+    height: $animated-circle-radius - calc($animated-circle-radius * (1 / 8));
+  }
 
-    37% {
-      transform: rotateZ(135deg) translate(50px, 50px);
-      opacity: 1 - calc(3 / 8);
-      width: $animated-circle-radius - calc($animated-circle-radius * (3 / 8));
-      height: $animated-circle-radius - calc($animated-circle-radius * (3 / 8));
-    }
+  25% {
+    transform: rotateZ(90deg) translate(50px, 50px);
+    opacity: 1 - calc(2 / 8);
+    width: $animated-circle-radius - calc($animated-circle-radius * (2 / 8));
+    height: $animated-circle-radius - calc($animated-circle-radius * (2 / 8));
+  }
 
-    50% {
-      transform: rotateZ(180deg) translate(50px, 50px);
-      opacity: 1 - calc(4 / 8);
-      width: $animated-circle-radius - calc($animated-circle-radius * (4 / 8));
-      height: $animated-circle-radius - calc($animated-circle-radius * (4 / 8));
-    }
+  37% {
+    transform: rotateZ(135deg) translate(50px, 50px);
+    opacity: 1 - calc(3 / 8);
+    width: $animated-circle-radius - calc($animated-circle-radius * (3 / 8));
+    height: $animated-circle-radius - calc($animated-circle-radius * (3 / 8));
+  }
 
-    62% {
-      transform: rotateZ(225deg) translate(50px, 50px);
-      opacity: 1 - calc(5 / 8);
-      width: $animated-circle-radius - calc($animated-circle-radius * (5 / 8));
-      height: $animated-circle-radius - calc($animated-circle-radius * (5 / 8));
-    }
+  50% {
+    transform: rotateZ(180deg) translate(50px, 50px);
+    opacity: 1 - calc(4 / 8);
+    width: $animated-circle-radius - calc($animated-circle-radius * (4 / 8));
+    height: $animated-circle-radius - calc($animated-circle-radius * (4 / 8));
+  }
 
-    75% {
-      transform: rotateZ(270deg) translate(50px, 50px);
-      opacity: 1 - calc(6 / 8);
-      width: $animated-circle-radius - calc($animated-circle-radius * (6 / 8));
-      height: $animated-circle-radius - calc($animated-circle-radius * (6 / 8));
-    }
+  62% {
+    transform: rotateZ(225deg) translate(50px, 50px);
+    opacity: 1 - calc(5 / 8);
+    width: $animated-circle-radius - calc($animated-circle-radius * (5 / 8));
+    height: $animated-circle-radius - calc($animated-circle-radius * (5 / 8));
+  }
 
-    87% {
-      transform: rotateZ(315deg) translate(50px, 50px);
-      opacity: 1 - calc(6.5 / 8);
-      width: $animated-circle-radius - calc($animated-circle-radius * (6.5 / 8));
-      height: $animated-circle-radius - calc($animated-circle-radius * (6.5 / 8));
-    }
+  75% {
+    transform: rotateZ(270deg) translate(50px, 50px);
+    opacity: 1 - calc(6 / 8);
+    width: $animated-circle-radius - calc($animated-circle-radius * (6 / 8));
+    height: $animated-circle-radius - calc($animated-circle-radius * (6 / 8));
+  }
 
-    100% {
-      transform: rotateZ(350deg) translate(50px, 50px);
-      opacity: 1 - calc(7 / 8);
-      width: $animated-circle-radius - calc($animated-circle-radius * (7 / 8));
-      height: $animated-circle-radius - calc($animated-circle-radius * (7 / 8));
-    }
+  87% {
+    transform: rotateZ(315deg) translate(50px, 50px);
+    opacity: 1 - calc(6.5 / 8);
+    width: $animated-circle-radius - calc($animated-circle-radius * (6.5 / 8));
+    height: $animated-circle-radius - calc($animated-circle-radius * (6.5 / 8));
+  }
+
+  100% {
+    transform: rotateZ(350deg) translate(50px, 50px);
+    opacity: 1 - calc(7 / 8);
+    width: $animated-circle-radius - calc($animated-circle-radius * (7 / 8));
+    height: $animated-circle-radius - calc($animated-circle-radius * (7 / 8));
+  }
 }
-  
+
 /*
  * -------------------------------------------------------------------------------------
  * -- Border Mouse Interaction
-*/
+ */
 
 $animated-border-color: rgb(170, 15, 150);
 
@@ -284,14 +281,63 @@ $animated-border-color: rgb(170, 15, 150);
   box-shadow: 0 0 0 0 $animated-border-color;
   border-radius: 30px;
 
-  transition: border-top-color border-bottom-color border-left-color border-right-color 0.25s ease-in;
+  transition: border-top-color border-bottom-color border-left-color
+    border-right-color 0.25s ease-in;
   transition: box-shadow 0.1s linear;
 }
 
 /*
  * -------------------------------------------------------------------------------------
+ * -- Gradient Border
+ */
+
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-angle-rotate {
+  from {
+    --border-angle: 0deg;
+  }
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+.gradient_border {
+  position: relative;
+  width: 728px;
+  height: 512px;
+
+  --border-angle: 0deg;
+  border-radius: 12px;
+
+  box-shadow: 0px 2px 4px hsl(0 0% 0% / 25%);
+  animation: border-angle-rotate 2s infinite linear;
+  border: 0.5rem solid transparent;
+
+  background:
+    linear-gradient(white, white) padding-box,
+    conic-gradient(
+    from var(--border-angle),
+    oklch(100% 100% 0deg),
+    oklch(100% 100% 45deg),
+    oklch(100% 100% 90deg),
+    oklch(100% 100% 135deg),
+    oklch(100% 100% 180deg),
+    oklch(100% 100% 225deg),
+    oklch(100% 100% 270deg),
+    oklch(100% 100% 315deg),
+    oklch(100% 100% 360deg)
+  ) border-box;
+}
+
+/*
+ * -------------------------------------------------------------------------------------
  * -- Image Card flip
-*/
+ */
 
 .card {
   position: relative;
@@ -300,11 +346,11 @@ $animated-border-color: rgb(170, 15, 150);
   transition: 1s ease-in-out;
   transform-style: preserve-3d;
 
-  &:hover &-face-front{
+  &:hover &-face-front {
     transform: rotateY(-180deg);
   }
 
-  &:hover &-face-back{
+  &:hover &-face-back {
     transform: rotateY(0);
   }
 

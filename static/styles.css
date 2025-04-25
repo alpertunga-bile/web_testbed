@@ -281,6 +281,48 @@
 
 /*
  * -------------------------------------------------------------------------------------
+ * -- Gradient Border
+ */
+@property --border-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes border-angle-rotate {
+  from {
+    --border-angle: 0deg;
+  }
+  to {
+    --border-angle: 360deg;
+  }
+}
+.gradient_border {
+  position: relative;
+  width: 728px;
+  height: 512px;
+  --border-angle: 0deg;
+  border-radius: 12px;
+  box-shadow: 0px 2px 4px hsla(0, 0%, 0%, 0.25);
+  animation: border-angle-rotate 2s infinite linear;
+  border: 0.5rem solid transparent;
+  background:
+    linear-gradient(rgb(23 23 23), rgb(23 23 23)) padding-box,
+    conic-gradient(
+    from var(--border-angle),
+    oklch(100% 100% 0deg),
+    oklch(100% 100% 45deg),
+    oklch(100% 100% 90deg),
+    oklch(100% 100% 135deg),
+    oklch(100% 100% 180deg),
+    oklch(100% 100% 225deg),
+    oklch(100% 100% 270deg),
+    oklch(100% 100% 315deg),
+    oklch(100% 100% 360deg)
+  ) border-box;
+}
+
+/*
+ * -------------------------------------------------------------------------------------
  * -- Image Card flip
  */
 .card {
